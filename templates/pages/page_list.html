@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Páginas{% endblock %}
+{% block content %}
+{% include 'pages/includes/pages_menu.html' %}
+<main role="main">
+
+    <div class="row mt-4">
+    {% for page in page_list|dictsort:"id" reversed %}
+
+        <div class="col-md-4">
+         <div class="card mb-4 text-white bg-dark">
+            {% if page.avatar %}
+                <img class="card-img-top" src="{{page.avatar.url}}" alt="Card image cap">
+            {% else %}
+                <img class="card-img-top" src="{% static 'registration/img/no-avatar.jpg' %}" alt="Card image cap">
+            {% endif %}
+            <div class="card-body">
+                {% if page.is_approved == True %}
+                    <h5 class="card-title">{{page.title}} </h5>
+                {% else %}
+                    <p></p>
+                    <h5 class="card-title">{{page.title}} <p style="color: yellow">Falta aprovación</p> </h5>
+                {% endif %}
+
+               <p class="card-text">{{page.content|striptags|safe|truncatechars:"200"}}</p>
+               {% if request.user == page.created_by %}
+                    {% if page.avatar %}
+                        <a href="{% url 'pages:page' page.id page.title|slugify %}" class="btn btn-info">leer más</a>
+                    {% endif %}
+                        <a href="{% url 'pages:update' page.id %}" class="btn btn-primary">Editar</a>
+                        <a href="{% url 'pages:delete' page.id %}" class="btn btn-danger">Eliminar</a>
+                    {% else %}
+                    {% if page.avatar %}
+                        <a href="{% url 'pages:page' page.id page.title|slugify %}" class="btn btn-info">leer más</a>
+                    {% endif %}
+               {% endif %}
+            </div>
+         </div>
+      </div>
+    {% endfor %}
+    </div>
+{% endblock %}
+</main>

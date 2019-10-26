@@ -1,0 +1,12 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Páginas{% endblock %}
+{% block content %}
+{% include 'pages/includes/pages_menu.html' %}
+    {% for page in queryset %}
+        <div class="container">
+            <a href="">{{ page.title }}</a>
+            <a href="">{{ page.address }}</a>
+        </div>
+    {% endfor %}
+{% endblock %}

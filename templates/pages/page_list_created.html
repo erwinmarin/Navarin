@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Páginas{% endblock %}
+{% block content %}
+{% include 'pages/includes/pages_menu.html' %}
+<main role="main">
+  <div class="container mb-4">
+    {% for page in page_list|dictsort:"id" reversed %}
+      <div class="row mt-3">
+        <div class="col-md-9 mx-auto">
+            {% if page.is_approved == True %}
+                <h2 class="mb-4">{{page.title}}</h2>
+            {% else %}
+                <p></p>
+                <h2 class="mb-4">{{page.title}} <p style="color: yellow;">Falta aprovación</p></h2>
+            {% endif %}
+            {% if page.avatar %}
+                <img src="{{page.avatar.url}}" class="img-fluid">
+            {% else %}
+                <img src="{% static 'registration/img/no-avatar.jpg' %}" class="img-fluid">
+            {% endif %}
+          <div>
+            <p>{{page.content|striptags|safe|truncatechars:"200"}}</p>
+            {% if request.user == page.created_by %}
+                {% if page.avatar %}
+                    <a href="{% url 'pages:page' page.id page.title|slugify %}">Leer más</a>
+                {% endif %}
+                <a href="{% url 'pages:update' page.id %}">Editar</a>
+                <a href="{% url 'pages:delete' page.id %}">Borrar</a>
+            {% endif %}
+            <p class="mb-4">Autor: {{page.created_by}}</p>
+            </p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}

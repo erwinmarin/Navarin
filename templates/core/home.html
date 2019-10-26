@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Inicio{% endblock %}
+{% block content %}
+
+<div class="s01">
+      <form  action="{% url 'pages:search' %}">
+        <fieldset align="center">
+          <legend>Busca Páginas</legend>
+        </fieldset>
+        <div class="inner-form">
+          <div id="autocomplete-container" class="input-field first-wrap">
+            <input id="autocomplete-input" name="q" type="text" placeholder="Páginas" />
+          </div>
+          <div class="input-field third-wrap">
+            <button class="btn-search" type="button">Buscar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+
+{% endblock %}

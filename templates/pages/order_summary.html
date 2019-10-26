@@ -1,0 +1,47 @@
+{% extends 'core/base.html' %}
+{% block content %}
+
+ <section>
+   <div class="row">
+    <table class="table table-hover table-bordered text-center">
+      <tr class="text-center">
+        <th>no.</th>
+        <th>Item</th>
+        <th>Price</th>
+      </tr>
+        <tr>
+          <td></td>
+          <td>
+            <span class="pull-right">
+              <a href="" data-balloon="remove this item from cart" class="text-danger" >
+                <i class="fas fa-trash"></i>
+              </a>
+            </span>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan= 3> You have not added any items yet.</td>
+        </tr>
+      <tr>
+        <td colspan=2>
+          <strong class="pull-right">Order Total:</strong>
+        </td>
+      </tr>
+      <tr>
+        <td colspan=1 >
+          <a href="" class="btn btn-warning pull-left">
+
+          </a> 
+        </td>
+        <td colspan=2>
+
+            <a href="" class="pull-right btn btn-primary">Proceed To Checkout</a>
+
+        </td>
+      </tr>
+    </table>
+     
+   </div>
+ </section>
+{% endblock %}

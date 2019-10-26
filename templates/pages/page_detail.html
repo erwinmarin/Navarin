@@ -1,0 +1,34 @@
+
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}{{page.title}}{% endblock %}
+{% block content %}
+{% include 'pages/includes/pages_menu.html' %}
+<main role="main">
+    <div class="row mt-4">
+    <div class="col-lg-4 offset-lg-1" >
+      <div>
+           <img src="{{object.avatar.url}}" class="img-fluid">
+          {% if request.user == object.created_by %}
+              <p></p>
+              <a href="{% url 'pages:update' page.id %}" class="btn btn-primary">Editar</a>
+              <a href="{% url 'pages:delete' page.id %}" class="btn btn-danger">Eliminar</a>
+          {% endif %}
+        </div>
+        <div id="titlebar" class="listing-titlebar" style=" height: 120px !important; ">
+            <div class="listing-titlebar-title">
+                <h2 class="section-heading mb-4">{{object.title}}</h2>
+                <p></p>
+            </div>
+        </div>
+        {{page.content|safe}}
+    </div>
+
+</main>
+
+<script src="{% static 'core/js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'core/js/gijgo.min.js' %}"></script>
+<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+
+{% endblock %}
